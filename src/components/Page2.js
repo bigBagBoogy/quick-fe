@@ -1,10 +1,12 @@
 // src/components/Page2.js
 import React, { useState } from "react";
+import styles from "./Page2.module.css";
 
 function Page2() {
   const [backendResponse, setBackendResponse] = useState(""); // 1
   const [backendResponseDB, setBackendResponseDB] = useState(""); // 2
-  const [databaseData, setDatabaseData] = useState(""); // 3
+  const [databaseData, setDatabaseData] = useState([]); // 3
+  const [userInput, setUserInput] = useState(""); // 2a State variable for user input
 
   // 1
   const connectToBackend = () => {
@@ -30,7 +32,7 @@ function Page2() {
   // 2
   const sendItemToBackendDatabase = () => {
     const newItemData = {
-      name: "New Item",
+      name: userInput, // Use the user's input
     };
     fetch("http://localhost:3000/api/dbItems", {
       method: "POST",
@@ -60,9 +62,8 @@ function Page2() {
       });
   };
 
-  // 3
+  // 3 fetch data from the database
   const loadDatabaseData = () => {
-    // Replace with your actual API endpoint URL to fetch data from the database
     const backendDBUrl = "http://localhost:3000/api/dbItems";
 
     fetch(backendDBUrl)
@@ -73,8 +74,12 @@ function Page2() {
         return response.json();
       })
       .then((data) => {
-        // Handle the data from the database here
-        setDatabaseData(data);
+        if (Array.isArray(data)) {
+          // Check if data is an array
+          setDatabaseData(data);
+        } else {
+          setDatabaseData([]); // Set it to an empty array or handle the error
+        }
       })
       .catch((error) => {
         console.error("There was a problem with the network request:", error);
@@ -82,11 +87,54 @@ function Page2() {
       });
   };
 
+  // 4
+  const deleteItemFromBackendDatabase = (itemId) => {
+    // Send a DELETE request to your server to delete the item
+    fetch(`http://localhost:3000/api/dbItems/${itemId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the response from the server
+        if (data.message) {
+          console.log(data.message);
+        } else {
+          console.log("Item deleted:", data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting item:", error);
+      });
+  };
+
   return (
-    <div>
-      <h1>Page 2</h1>
+    <div className={styles.page2}>
+      <h1 style={{ color: "white" }}>Page 2</h1>
+
       <button onClick={connectToBackend}>Connect to Backend</button>
       {backendResponse && <h1>{backendResponse}</h1>}
+      <h2 style={{ color: "white" }}>Database Data</h2>
+      <ul>
+        {databaseData.map((item) => (
+          <li key={item._id}>
+            {item.name}
+            <button onClick={() => deleteItemFromBackendDatabase(item._id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        placeholder="Enter data"
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)} // Update user input state
+      />
       <button onClick={sendItemToBackendDatabase}>Save to Backend DB</button>
       {backendResponseDB && <h1>{backendResponseDB}</h1>}
       <button onClick={loadDatabaseData}>Load Data from DB</button>

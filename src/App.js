@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/page2" element={<Page2 />} />
+          <Route classname="page2" path="/page2" element={<Page2 />} />
           <Route
             path="/"
             element={
