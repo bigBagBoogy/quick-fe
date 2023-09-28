@@ -13,3 +13,4 @@ git rm -r --cached node_modules
 # persising issues:
 
 Error fetching data: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+in "on mount" useEffect.

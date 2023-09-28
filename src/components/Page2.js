@@ -117,7 +117,7 @@ function Page2() {
       <h1 style={{ color: "white" }}>Page 2</h1>
 
       <button onClick={connectToBackend}>Connect to Backend</button>
-      {backendResponse && <h1>{backendResponse}</h1>}
+      {backendResponse && <h3 style={{ color: "white" }}>{backendResponse}</h3>}
       <h2 style={{ color: "white" }}>Database Data</h2>
       <ul>
         {databaseData.map((item) => (
