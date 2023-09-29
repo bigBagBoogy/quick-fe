@@ -10,7 +10,7 @@ git push -u origin main
 
 git rm -r --cached node_modules
 
-# persising issues:
+# persisting issues:
 
 Error fetching data: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
 in "on mount" useEffect.
