@@ -1,6 +1,6 @@
 // src/components/Page2.js
 import React, { useState } from "react";
-import styles from "./Page2.module.css";
+import "./Page2.css";
 
 function Page2() {
   const [backendResponse, setBackendResponse] = useState(""); // 1
@@ -113,7 +113,7 @@ function Page2() {
   };
 
   return (
-    <div className={styles.page2}>
+    <div className="styles.page2">
       <h1 style={{ color: "white" }}>Page 2</h1>
 
       <button onClick={connectToBackend}>Connect to Backend</button>
@@ -131,6 +131,7 @@ function Page2() {
       </ul>
       <input
         type="text"
+        className="custom-input"
         placeholder="Enter data"
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)} // Update user input state

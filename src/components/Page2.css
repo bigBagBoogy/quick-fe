@@ -1,0 +1,40 @@
+body {
+  
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  font-size: calc(10px + 2vmin);
+}
+
+
+button {
+  /* Size and padding */
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px;
+  background-color: #61dafb; 
+  color: #000000; /* Text color is white */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #ffa6d1; /* Change color on hover */
+  transform: scale(1.05); /* Scale the button slightly on hover */
+}
+
+.custom-input {
+  border-radius: 10px; /* Adjust the value to control the roundness of corners */
+  padding: 30px; /* Adjust the padding to control the size */
+  background-color: #ffa6d1; /* Change the background color as desired */
+  box-shadow: 10 20px 41px rgba(255, 255, 255, 0.1); /* Add a subtle box shadow for depth */
+}
+
+/* Add hover effect */
+.custom-input:hover {
+  background-color: #d3e4ff; /* Change the background color on hover */
+}
